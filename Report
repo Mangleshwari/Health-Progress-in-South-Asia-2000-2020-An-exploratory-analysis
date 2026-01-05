@@ -1,1 +1,84 @@
-s
+# Health Progress in South Asia (2000-2020): An Exploratory Analysis
+## Setup Instruction
+###1. Data Collection
+The data set was manually downloaded from the World Bank Open Data Portal:
+
+- Source: [Health Nutrition and Population Statistics](https://databank.worldbank.org/source/health-nutrition-and-population-statistics)
+- Selection: South Asian countries, health-related series, years 2000–2020
+- Format: CSV files exported via the portal's download options
+
+No automated scraping or API calls were used. The data is stored in:
+To load the dataset using a reproducible path:
+
+```r
+install.packages("here")  # Only needed once
+library(here)
+data <- read.csv(here("data", "health_south_asia_2000_2020.csv"))
+```
+---
+
+###2. Project Overwiew
+
+This project explores health trends across South Asian countries from 2000 to 2020 using World Bank data. It includes static exploratory analysis and an interactive Shiny dashboard to visualize indicators like life expectancy, immunization, mortality, and health expenditure.
+
+####3a. Running Static Analysis
+
+To generate plots and summary statistics:
+
+```r
+source("code/eda_analysis.R")
+```
+---
+
+####3b. Launching the Shiny App
+
+```markdown
+## Launching the Shiny App
+
+To run the interactive dashboard:
+
+```r
+shiny::runApp("app/app.R")
+
+
+####3c. Using Cached vs New Data
+
+## Data Usage
+
+- Cached data: Use `data/health_progress_in_SA.csv` or `data/health_progress_wide.csv` for quick testing.
+- New data: Upload a CSV with the same structure via the Shiny app interface.
+
+###4. Folder Structure
+
+- `code/`: R scripts for data cleaning and analysis (`EDA_FINAL.R`, `data_cleaning.R`)
+- `app/`: Shiny app code (`app.R`)
+- `data/`: Sample datasets (`health_progress_in_SA.csv`, `health_progress_wide.csv`)
+- `Final_Report.pdf`: Summary of findings and reproducibility notes
+- `Proposal.pdf`: Initial project proposal
+
+###5. Dependencies
+
+- R version: 4.2.1 or later
+- Required packages:
+  - tidyverse
+  - janitor
+  - ggplot2
+  - shiny
+  - dplyr
+  - readr
+  
+install.packages(c("tidyverse", "janitor", "ggplot2", "shiny"))
+
+###6. Licensing
+
+All data used in this project is sourced from the [World Bank Open Data Portal](https://databank.worldbank.org/source/health-nutrition-and-population-statistics) and is covered under the World Bank Open Data License. No personal or sensitive data is used.
+
+###7. Static Outputs
+
+Running `eda_analysis.R` will generate `.jpg` or `.png` plots summarizing trends, distributions, and comparisons across countries and indicators. These plots are included in the final report and can be reused for presentations or grading.
+
+###8. Troubleshooting
+
+- If you get a "file not found" error, check your working directory with `getwd()` and confirm the file path.
+- Use `here::here()` for robust file paths across systems.
+- Ensure all required packages are installed before running scripts.
